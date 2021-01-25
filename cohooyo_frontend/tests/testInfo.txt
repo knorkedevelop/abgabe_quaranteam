@@ -1,0 +1,86 @@
+Das JavaSript Unit Testframework Jest wird mit Expo genutzt.
+Die React Native Testing Library ermöglicht testen von gerenderten Komponenten
+     und in Komponenten definierten event handlern.
+
+
+Offizieller Guide:
+https://docs.expo.io/guides/testing-with-jest/
+Inoffizieller Guide, detaillierter:
+https://www.testim.io/blog/react-native-unit-testing/
+
+Zusammenfassung:
+
+Alle Test Files werden hier im Test Directory abgelegt.
+Bennenung: <NameZuTestenderFile>.test.js
+Testfiles koennen beliebig viele Tests beinhalten.
+
+Standard-Import in Testfiles:
+import <zu testende File>;
+
+Wenn einzelne Komponenten auf ihre Elemente geprüft werden sollen außerdem:
+import React from 'react';
+import renderer from 'react-test-renderer';
+
+
+Terminal Commands:
+
+     Installation:
+     npm install 
+     oder:
+          npm i jest-expo --save-dev
+          npm i react-test-renderer --save-dev
+
+npm test       : Alle Tests laufen lassen
+npm test -- <zusätzliche Argumente>
+npm test -- -o      : Testet Files, die noch nicht Committed wurden
+npm test -- -u      : Updated automatisch alle Snapshots
+
+
+
+Testsyntax:
+Tests bekommen zumindest einen Namen und ein Lambda inklusive "expect()"
+
+     Beispiele:
+     test('Are they understood?', () => {
+                    expect(myJoke.understood).toBeFalsy();
+               });
+
+     test('U is not in here.', () => {
+          expect('here).not.toMatch(/u/);
+     });
+     Mehr in App.test.js     
+
+
+     describe() Jest-Methode fuer Test Suites aus zusammengehörigen Tests:
+     describe("AlleTestsFuerFunktionX", () => {
+          test("doesItDoX", () => {
+          // actual test1
+          });
+          test("alsoThis", () => {
+          // actual test2
+          });
+     });
+
+.toBeNull()/Truthy() kann auch genutzt werden, um zu bestimmen, ob etwas existiert
+
+.skip an Ende des Testfunktionsnamen, um ihn vorerst nicht auszuführen
+
+
+
+Testarten mit Jest, genaueres siehe online Dokumentationen:
+     Test Suites: Testzusammenfassungen/Files, Hauptkomponente von Jest
+     Funktionale Tests: Standard Jest-Tests
+     Snapshot Tests: Konsistenz der UI während die App läuft überprüfen. 
+          Schneller, als vollständiges kompilieren der App + manuelles Testen.
+          Snapshots von UI-Elementen muessen vorher erstellt und spaeter geupdated werden, 
+          immer wenn das entsprechende UI-Element bewusst bearbeitet wurde.
+     Mocking: z.B. fuer API calls, es wird ein Rückgabewert externer Dependencies
+          emuliert.
+
+
+Ausserdem: Test Suites kompilieren z.T. wegen Fehlern nicht, mit denen die App
+ selbst noch ausführbar ist. Z.B. ungenutzte Styles mit fehlerhafter Syntax
+ => Findet Syntaxfehler in noch nicht eingebundenem Code
+ Errormeldungen sind leicht nachzuvollziehen.
+
+

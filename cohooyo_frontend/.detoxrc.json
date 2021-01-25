@@ -1,0 +1,13 @@
+{
+  "testRunner": "jest",
+  "runnerConfig": "e2e/config.json",
+  "configurations": {
+    "android": {
+      "type": "android.emulator",
+      "binaryPath": "SDK-PATH_EINGEBEN",
+      "device": {
+        "avdName": "Pixel_3a_API_30_x86"
+      }
+    }
+  }
+}
